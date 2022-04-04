@@ -17,32 +17,33 @@ export const Search = (props) => {
   });
 
   const onPriceInputChange = (name, value) => {
-    // TODO: implement price change handler
+    setPrice((prev) => ({ ...prev, [name]: value }));
   }
 
   const onCheckboxClick = (name, checked) => {
-    // TODO: implement checkbox click handler
+    setColumns((prev) => ({ ...prev, [name]: checked }))
   }
 
   const filterProducts = () => {
-    // TODO: implement handler for filtering products by price range
+    return props.products.filter((product) =>
+      product.price >= (price.priceFrom || 0) && product.price <= (price.priceTo === '' ? Infinity : +price.priceTo)
+    )
   }
 
-  let displayedProducts = [];
   return (
     <div className="Products">
       <FilterForm
-        priceFrom={''}
-        priceTo={''}
-        onPriceInputChange={''} />
+        priceFrom={price.priceFrom}
+        priceTo={price.priceTo}
+        onPriceInputChange={onPriceInputChange} />
 
       <ToggleColumns
-        onCheckboxClick={''}
-        columns={''} />
+        onCheckboxClick={onCheckboxClick}
+        columns={columns} />
 
       <ProductList
-        products={displayedProducts}
-        columns={''} />
+        products={filterProducts()}
+        columns={columns} />
     </div>
   );
 }

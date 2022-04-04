@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const FilterForm = (props) => {
+export const FilterForm = ({ priceFrom, priceTo, onPriceInputChange }) => {
 
-  const onPriceInputChange = (e) => {
-    // TODO: implement handler
+  const handleChange = (e) => {
+    onPriceInputChange(e.target.id, +e.target.value);
   }
 
   // TODO: bind handlers and props
@@ -14,13 +14,19 @@ export const FilterForm = (props) => {
         type="number"
         id="priceFrom"
         name="priceFrom"
-        placeholder="Price from..." />
+        placeholder="Price from..."
+        value={priceFrom}
+        onChange={handleChange}
+      />
       <label htmlFor="priceTo">Price To:</label>
       <input
         type="number"
         id="priceTo"
         name="priceTo"
-        placeholder="Price to..." />
+        placeholder="Price to..."
+        value={priceTo}
+        onChange={handleChange}
+      />
     </div>
   )
 }
